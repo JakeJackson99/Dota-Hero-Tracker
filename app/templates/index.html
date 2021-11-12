@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
 </head>
+
 <body>
-    <h1>Hello</h1>
+    <h2>Enter your details</h2>
+
+    <form method="post" action="{{ url_for('index') }}">
+        <label for="steam32_id">Steam ID</label>
+        <input type="text" id="steam32_id" name="steam32_id"> <br>
+
+        <label for="hero_list">Select Hero</label>
+        <select id="hero_list" name="hero_id">
+            {% for hero in heroes %}
+            <option value={{ hero.id }} >{{ hero.localized_name }}</option>
+            {% endfor %}
+        </select> <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
 </body>
+
 </html>
