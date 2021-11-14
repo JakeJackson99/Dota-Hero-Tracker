@@ -22,10 +22,10 @@ def match_results(steam32_id, hero_id, num_results=20):
 
 
 def match_map(data):
-    """Transforms a list of T/F values to integers
+    """Transforms a list of boolean values to integers.
 
-    For each win, a counter is increased and indexed in place of the boolean; 
-    the opposite occurs for a loss.
+    For each win/loss, a counter is increased/decreased and indexed in 
+    place of the boolean.
 
     Args:
         data -- a list of results in the form [True, True, False, True, ...]
