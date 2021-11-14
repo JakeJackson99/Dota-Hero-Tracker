@@ -17,8 +17,10 @@ def match_results(steam32_id, hero_id, num_results=20):
         f"https: // api.opendota.com/api/players/{steam32_id} + \
              matches?hero_id={hero_id}"). json()[0:num_results]
 
-    return [True if (match['player_slot'] < 128) == match['radiant_win'] 
-                else False for match in matches]
+    result = [True if (match['player_slot'] < 128) == match['radiant_win']
+              else False for match in matches]
+
+    return match_map(result)
 
 
 def match_map(data):
@@ -30,7 +32,7 @@ def match_map(data):
     Args:
         data -- a list of results in the form [True, True, False, True, ...]
 
-    Results:
+    Returns:
         a list of values resulting in the net wins/losses for a user on a hero
     """
     x = 0
@@ -39,5 +41,5 @@ def match_map(data):
     for value in data:
         x = (x + 1) if value is True else (x - 1)
         result.append(x)
-    
+
     return result
