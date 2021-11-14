@@ -1,6 +1,7 @@
 import requests
 STEAM32_ID = 197033655
 BASE_URL = "https://api.opendota.com/api"
+TEST = "https://api.opendota.com/api/players/197033655/matches?hero_id=80"
 
 
 def match_results(steam32_id, hero_id, num_results=20):
@@ -13,9 +14,8 @@ def match_results(steam32_id, hero_id, num_results=20):
     Returns:
         list of boolean values corresponding to a win, i.e. True -> win
     """
-    matches = requests.get(
-        f"https: // api.opendota.com/api/players/{steam32_id} + \
-             matches?hero_id={hero_id}"). json()[0:num_results]
+    matches = requests.get(f"{BASE_URL}/players/{steam32_id}/matches?hero_id={hero_id}").json()[:num_results]
+    # matches = requests.get(f"{TEST}").json()[:num_results]
 
     result = [True if (match['player_slot'] < 128) == match['radiant_win']
               else False for match in matches]

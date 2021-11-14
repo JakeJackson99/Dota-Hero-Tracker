@@ -2,31 +2,32 @@ const ctx = document.getElementById("myChart").getContext("2d");
 ctx.canvas.width = 2;
 ctx.canvas.height = 1;
 
-// async function chartData() {
-//   let data = await fetch("/get_data");
+async function loadGraph() {
+  const response = await fetch("/get_data");
+  const match_data = await response.json();
 
-//   const chart = new Chart(ctx, {});
-// }
+  let n = match_data.length;
+  const labels = Array.from({ length: n }, (_, index) => index + 1);
 
-const data = {
-  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-  datasets: [
-    {
-      // data: [1, 2, 1, 0, -1, -2, -3, -2, -1, 0, 1, 2, 3, 4, 3],
-      data: [1, 2, 3, 4, 5, 6, 7, 8, 7, 6, 5, 4, 5, 6, 7],//
-      tension: 0,
+  const myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          data: match_data,
+          tension: 0,
+        },
+      ],
     },
-  ],
-};
-
-const myChart = new Chart(ctx, {
-  type: "line",
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
       },
     },
-  },
-});
+  });
+}
+
+loadGraph();
