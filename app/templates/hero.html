@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hero Data</title>
-</head>
+{% block content %}
 
-<body>
+<div class="container">
     <h1>Hero Data</h1>
-</body>
 
-</html>
+    <canvas id="myChart"></canvas>
+    <p id="caption">The chart is displaying a simple line chart.</p>
+</div>
+
+{% endblock %}
